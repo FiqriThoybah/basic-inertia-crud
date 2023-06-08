@@ -23,9 +23,13 @@
         "@inertiajs/progress": "^0.2.7",
         "@inertiajs/react": "^1.0.7",
         "@vitejs/plugin-react": "^4.0.0",
+        "lightbox.js-react": "^0.6.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-helmet": "^6.1.0",
+        "react-icons": "^4.9.0",
+        "react-router-dom": "^6.11.2",
+        "simple-react-lightbox": "^3.6.9-0",
         "sweetalert": "^2.1.2"
     }
 }

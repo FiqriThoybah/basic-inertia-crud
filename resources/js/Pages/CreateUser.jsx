@@ -1,14 +1,20 @@
 import { Helmet } from "react-helmet";
 import Layout from "../Components/Layout";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import swal from "sweetalert";
+import { InertiaLink } from "@inertiajs/inertia-react";
+import { SlideshowLightbox } from "lightbox.js-react";
+import Avatar from "../../../public/images/Avatar.jpg";
 
-export default function CreateUser({ errors }) {
+export default function CreateUser({ errors, editUsers }) {
     console.log("error :", errors);
+    console.log('lihat edit user :', editUsers);
+    const imageRef = useRef();
+    const [image, setImage] = useState(base_url + "/" + editUsers ?.image || "");
     const [values, setValues] = useState({
-        name: "",
-        email: "",
+        name: editUsers?.name || "",
+        email: editUsers?.email || "",
         password: "",
         password_confirmation: "",
     });
@@ -59,7 +65,29 @@ export default function CreateUser({ errors }) {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        Inertia.post(route("users.post"), values, {
+        const formData = new FormData();
+        for (let key in values) {
+            formData.append(key, values[key]);
+        }
+        formData.append("image", imageRef.current.files[0]);
+        Inertia.post(route("users.store"), formData, {
+            onSuccess: () => {
+                swal("Good job!", "You clicked the button!", "success");
+            },
+        });
+        console.log(values);
+    };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append('id', editUsers.id)
+        for (let key in values) {
+            formData.append(key, values[key]);
+        }
+        formData.append("image", imageRef.current.files[0]);
+        formData.append("_method", 'put')
+        Inertia.post(route("users.update", editUsers.id), formData, {
             onSuccess: () => {
                 swal("Good job!", "You clicked the button!", "success");
             },
@@ -82,6 +110,18 @@ export default function CreateUser({ errors }) {
         }
     };
 
+    const buttonDisableUpdate = () => {
+        if (
+            values.name === "" ||
+            values.email === ""
+            
+        ) {
+            return true; 
+        } else {
+            return false;
+        }
+    };
+
     const styles = {
         classNameInput:
             "border py-2 w-full px-2 mb-3 bg-gray-200 focus:bg-blue-400",
@@ -89,14 +129,50 @@ export default function CreateUser({ errors }) {
         classNameAlert: "text-red-500",
     };
 
+    
+    const handleUpload = (e) => {
+        e.preventDefault();
+        let reader = new FileReader();
+        reader.onloaded = () => {
+            if (reader.readyState === 2) {
+                setImage(reader.result);
+            }
+        };
+        reader.readAsDataURL(e.target.files[0]);
+    };
+
     return (
-        <div>
+        <div className="h-[100vh]">
             <Helmet>
                 <title>CreateUser</title>
             </Helmet>
             <div>
-                <h1>Crete New User</h1>
-                <form onSubmit={handleSubmit} action="post">
+                <div className="flex justify-between">
+                    <h1>Crete New User</h1>
+                    <InertiaLink
+                        href="http://127.0.0.1:8000/users"
+                        className="bg-blue-500 py-2 px-4 rounded"
+                    >
+                        Back
+                    </InertiaLink>
+                </div>
+                <div>
+                    <h1 className="text-center text-2xl font-bold mb-3">{editUsers?'Form Update User' : 'Form Register User'}</h1>
+                </div>
+                <div>
+                    <SlideshowLightbox>
+                        <img
+                            className="w-32 h-32 mx-auto border border-black overflow-hidden rounded-full"
+                            src={image === "" ? Avatar : image}
+                            alt="avatar.png"
+                        />
+                    </SlideshowLightbox>
+                </div>
+                <form
+                    onSubmit={editUsers ? handleUpdate : handleSubmit}
+                    action="post"
+                    encType="multipart/form-data"
+                >
                     <div>
                         <label className={styles.classNameLabel} htmlFor="name">
                             Name
@@ -144,7 +220,7 @@ export default function CreateUser({ errors }) {
                             {error.email}
                         </div>
                     </div>
-                    <div>
+                    {editUsers ? '' : (<div><div>
                         <label
                             className={styles.classNameLabel}
                             htmlFor="password"
@@ -196,16 +272,41 @@ export default function CreateUser({ errors }) {
                                 ? "password dan password confirmation tidak cocok"
                                 : ""}
                         </div>
+                    </div></div>)}
+                    <div>
+                        <label
+                            className={styles.classNameLabel}
+                            htmlFor="image"
+                        >
+                            image
+                        </label>
+                        <input
+                            type="file"
+                            className={styles.classNameInput}
+                            id="image"
+                            ref={imageRef}
+                            onChange={handleUpload}
+                        />
+                        {/* error dibagian backend (server) */}
+                        {errors.image && (
+                            <div className={styles.classNameAlert}>
+                                {errors.image}
+                            </div>
+                        )}
+                        {/* error dibagian frontend  */}
+                        <div className={styles.classNameAlert}>
+                            {error.image}
+                        </div>
                     </div>
                     <div>
                         <button
                             className={`w-full ${
-                                buttonDisable() ? "bg-blue-200" : "bg-blue-500"
+                                (editUsers ? buttonDisableUpdate() : buttonDisable()) ? "bg-blue-200" : "bg-blue-500"
                             } text-white text-lg font-semibold`}
                             type="submit"
-                            disabled={buttonDisable()}
+                            disabled={editUsers ? buttonDisableUpdate() : buttonDisable()}
                         >
-                            Register
+                            {editUsers ? "Update" : 'Register'}
                         </button>
                     </div>
                 </form>

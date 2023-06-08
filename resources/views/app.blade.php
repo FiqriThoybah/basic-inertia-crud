@@ -8,6 +8,9 @@
     @vite('resources/css/app.css')
     @vite('resources/js/app.jsx')
     @viteReactRefresh
+    <script>
+      window.base_url = "{{url("/")}}"
+    </script>
   </head>
   <body>
     @inertia

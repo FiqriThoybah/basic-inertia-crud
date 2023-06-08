@@ -2,16 +2,15 @@ import { Helmet } from "react-helmet";
 import Layout from "../Components/Layout";
 
 export default function Home(props) {
-    console.log(props);
+    console.log("test :",props);
     return (
-    <div>
+    <div className="h-[100vh]  w-full">
         <Helmet>
-            <title>Home</title>    
+            <title>Home</title>
         </Helmet>    
-            <div className="text-center bg-red-500  ">
+            <div className="text-center">
                 <p>Nama : {props.name}</p>
                 <p>Company : {props.company}</p>
-                <h1 className="mt-8 font-semibold text-4xl">Hello world!</h1>
             </div>
             <div>
                 {/* form submit */}
@@ -114,20 +113,15 @@ export default function Home(props) {
                 </form>  
             </div>
 
-            <div className="mt-2 grid  bg-red-500 rounded-[20px]">
+            <div className="mt-2 grid">
                     <div className="mb-auto text-center ">
-                        <h2 className="text-lg font-bold">
+                        <h2 className="text-lg font-bold text-orange-500">
                         Transaksi Nasabah Harian
                         </h2>
                         
                     </div>
             </div>
-            <div className="mt-[100px] grid bg-black rounded-[20px]">
-                <div className=" text-center text-white">
-                    assaacdcdscds
-                </div>
-                
-            </div>
+            
     </div>
     );
 }
