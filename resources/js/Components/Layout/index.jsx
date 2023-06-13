@@ -5,14 +5,14 @@ import Navbar from "../Navbar";
 const Layout = ({ children }) => {
     return (
         <React.Fragment>
-            <div className="flex w-full">
+            <div className="flex w-full ">
                 
-                    <div className=" w-56  bg-orange-500 md:block ">
+                    <div className="  bg-orange-500 md:block flex fixed h-full">
                         <Sidebar />
                     </div>
 
                     {/* To reset scroll region (https://inertiajs.com/pages#scroll-regions) add `scroll-region="true"` to div below */}
-                    <div className="w-full px-4 py-8  md:p-12">
+                    <div className="w-full ml-[240px] px-4 py-8  md:p-12 bg-orange-100">
                         {children}
                     </div>
                 

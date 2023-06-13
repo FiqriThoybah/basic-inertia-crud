@@ -1,23 +1,23 @@
 import { Helmet } from "react-helmet";
 import Layout from "../Components/Layout";
 
-export default function Home(props) {
-    console.log("test :",props);
+export default function Home(test) {
+    // console.log("test :",props);
     return (
     <div className="h-[100vh]  w-full">
         <Helmet>
             <title>Home</title>
         </Helmet>    
             <div className="text-center">
-                <p>Nama : {props.name}</p>
-                <p>Company : {props.company}</p>
+                <p>Nama : {test.name}</p>
+                <p>Company : {test.company}</p>
             </div>
             <div>
                 {/* form submit */}
                 <form className="mt-6 w-full max-w-2xl mb-4">
                     <div className="md:flex md:items-center mb-4">
                     <div className="md:w-[200px]">
-                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="modul">
+                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="modul">
                         Modul Rekon
                         </label>
                     </div>
@@ -38,7 +38,7 @@ export default function Home(props) {
                     </div>
                     <div className="md:flex md:items-center mb-4">
                     <div className="md:w-[200px]">
-                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="submodul">
+                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="submodul">
                         Submodul Rekon 
                         </label>
                     </div>
@@ -58,7 +58,7 @@ export default function Home(props) {
                     </div>
                     <div className="md:flex md:items-center mb-4">
                     <div className="md:w-[200px]">
-                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="laporan">
+                        <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="laporan">
                         Jenis Laporan 
                         </label>
                     </div>
@@ -80,7 +80,7 @@ export default function Home(props) {
                     {/* import date */}
                     <div className="md:flex md:items-center mb-4">
                             <div className="md:w-[200px]">
-                                <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" for="submodul">
+                                <label className=" text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4" htmlFor="submodul">
                                 Report Date 
                                 </label>
                             </div>
@@ -99,12 +99,12 @@ export default function Home(props) {
                     {/* button submit */}
                     <div className="md:flex md:items-start">
                     <div className="md:w-[200px]">
-                        <button className="shadow bg-primary hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                        <button className="shadow bg-blue-400 hover:bg-teal-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                         Submit
                         </button>
                     </div>
                     <div className="md:w-2/3 ">
-                    <button className="shadow bg-btnExport hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
+                    <button className="shadow bg-green-600 hover:bg-green-500 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded" type="button">
                         Export
                         </button>
                     </div>

@@ -14,12 +14,12 @@ const handleDelete = (id) => {
         dangerMode: true,
     }).then((willDelete) => {
         if (willDelete) {
-            Inertia.delete(route('users.destroy',id), {
+            Inertia.delete(route("users.destroy", id), {
                 onSuccess: () => {
                     swal("Data sudah dihapus");
-                  },
-              })
-            }
+                },
+            });
+        }
     });
 };
 const User = ({ users, create_url }) => {
@@ -65,6 +65,12 @@ const User = ({ users, create_url }) => {
                                             </th>
                                             <th
                                                 scope="col"
+                                                className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase "
+                                            >
+                                                Gambar
+                                            </th>
+                                            <th
+                                                scope="col"
                                                 className="py-3 px-6 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400"
                                             >
                                                 Name
@@ -85,6 +91,11 @@ const User = ({ users, create_url }) => {
                                             <tr key={item.id}>
                                                 <td className="px-2 py-4 whitespace-nowrap">
                                                     {index + 1}
+                                                </td>
+                                                <td className="px-2 py-4 whitespace-nowrap">
+                                                    <div >
+                                                        <img className="h-6 w-10 rounded-[20px]" src={item.image} alt="" />
+                                                    </div>
                                                 </td>
                                                 <td className="px-2 py-4 whitespace-nowrap">
                                                     {item.name}
@@ -116,7 +127,12 @@ const User = ({ users, create_url }) => {
                                                                 />
                                                             </svg>
                                                         </InertiaLink>
-                                                        <button onClick={handleDelete.bind(this, item.id)}>
+                                                        <button
+                                                            onClick={handleDelete.bind(
+                                                                this,
+                                                                item.id
+                                                            )}
+                                                        >
                                                             <svg
                                                                 xmlns="http://www.w3.org/2000/svg"
                                                                 fill="none"

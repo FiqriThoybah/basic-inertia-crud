@@ -7,19 +7,29 @@ const Sidebar = () => {
     let pageActive = parsePage(window.location.pathname)
     console.log(pageActive);
     const Menus = [
-        { menu: "Home", href: "/" },
+        { menu: "Dashboard Rekon", href: "/home" },
+        { menu: "Finnet Rekon", href: "/finnet" },
+        { menu: "Manage Rekon", href: "/manage-rekon" },
+        { menu: "Posting", href: "/posting" },
+        { menu: "Audit Trial", href: "/audit-trial" },
+        { menu: "File Management", href: "/file-management" },
+        { menu: "User Management", href: "/user-management" },
+        { menu: "User Rights", href: "/user-rights" },   
         { menu: "Users", href: "/users" },
-        { menu: "Profile", href: "/home" },
         
     ];
 
     return (
         <React.Fragment>
-            <div className="text-white w-full   ">
+            <div className="text-white w-60">
                 {/* <p className="text-2xl">{count}</p> */}
-                <div className="flex bg-slate-800 justify-center p-2 mb-4">
-                    <p className="text-2xl font-semibold ">BSI</p>
+                <div className=" items-center pt-[30px] pb-[20px] uppercase bg-slate-800 p-2 mb-4">
+                    <p className="flex items-center ml-1 text-[40px] font-bold ">BSI 
+                        <span className="font-medium text-sm">Bank Syariah <br /> Indonesia</span>
+                    </p> 
+                    <p className="text-[8px] ml-3  font-medium">Create By : Fiqri</p>
                 </div>
+            
                 <div className="">
                     {Menus.map((menu, index) => (
                         <Menu pageActive={`/${pageActive[1]}`}  key={index} href={menu.href}>
@@ -38,7 +48,7 @@ const Menu = React.memo(({ children, href, pageActive }) => {
     return (
         <div>
             <InertiaLink className="" href={href}>
-                <button className={`${href === pageActive ? 'bg-slate-900' : ''} py-2 font-semibold text-lg flex items-center justify-center rounded-lg w-full`}>
+                <button className={`${href === pageActive ? 'bg-slate-900' : ''} py-2 font-semibold text-lg flex  justify-start pl-10 rounded-lg w-full`}>
                     {/* <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"

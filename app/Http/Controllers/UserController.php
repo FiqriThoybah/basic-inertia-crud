@@ -59,7 +59,7 @@ class UserController extends Controller
         $post["image"] = $image;
         $post["password"] = Hash::make($request->password);
         User::create($post);
-        return Redirect::route('users.create');
+        return Redirect::route('users.index');
     }
 
     /**

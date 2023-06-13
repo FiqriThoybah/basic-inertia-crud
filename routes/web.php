@@ -38,3 +38,12 @@ Route::resource('/users', UserController::class);
 
 // Route::get('users')->name('users')->uses('UserController');
 
+Route::inertia('/posting', 'Posting/Posting');
+
+Route::inertia('/posting/approver', 'Posting/Approver')->name('posting.approver');
+Route::inertia('/finnet', 'Finnet/index');
+Route::inertia('/manage-rekon', 'ManageRekon/index');
+Route::inertia('/audit-trial', 'AuditTrial/index');
+Route::inertia('/file-management', 'FileManagement/index');
+Route::inertia('/user-management', 'UserManagement/index');
+Route::inertia('/user-rights', 'UserRights/index');

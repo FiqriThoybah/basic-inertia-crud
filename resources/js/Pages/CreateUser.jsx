@@ -65,6 +65,12 @@ export default function CreateUser({ errors, editUsers }) {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        setValues({
+            name: "",
+            email: "",
+            password: "",
+            password_confirmation: "",
+        });
         const formData = new FormData();
         for (let key in values) {
             formData.append(key, values[key]);
@@ -114,7 +120,6 @@ export default function CreateUser({ errors, editUsers }) {
         if (
             values.name === "" ||
             values.email === ""
-            
         ) {
             return true; 
         } else {
@@ -128,7 +133,6 @@ export default function CreateUser({ errors, editUsers }) {
         classNameLabel: "text-md text-gray-600 mb-2 font-semibold uppercase",
         classNameAlert: "text-red-500",
     };
-
     
     const handleUpload = (e) => {
         e.preventDefault();
@@ -147,14 +151,13 @@ export default function CreateUser({ errors, editUsers }) {
                 <title>CreateUser</title>
             </Helmet>
             <div>
-                <div className="flex justify-between">
-                    <h1>Crete New User</h1>
+                <div className="flex py-2 px-4 text-[30px]  font-bold  ">
                     <InertiaLink
                         href="http://127.0.0.1:8000/users"
-                        className="bg-blue-500 py-2 px-4 rounded"
+                        className="text-blue-400 hover:text-blue-300"
                     >
-                        Back
-                    </InertiaLink>
+                        Back /
+                    </InertiaLink><span className="ml-2 text-slate-500">{editUsers ? "Update" : "Create"}</span>
                 </div>
                 <div>
                     <h1 className="text-center text-2xl font-bold mb-3">{editUsers?'Form Update User' : 'Form Register User'}</h1>
